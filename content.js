@@ -41,6 +41,11 @@ chrome.runtime.onMessage.addListener(
         console.error(err);
     })
 );
+
+const playPause = document.querySelector('.playPause');
+playPause.addEventListener('click', (e) => {
+  e.target.classList.toggle('pause');
+});
 //use doc query selector, provide the id (nextBtn)
 //use an if conditional or other buttons...
 //create a function when you click the next button id...
@@ -55,7 +60,7 @@ document.querySelector('#nextBtn').addEventListener("click", () => {
     fetch("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=michael_jackson")
     .then(response => response.json())
     .then((data) => {
-        console.log(data)
+        // console.log(data)
         
         const container = document.querySelector('.container');
         const artist = data['album'][0].strArtist;
@@ -74,11 +79,11 @@ document.querySelector('#nextBtn').addEventListener("click", () => {
     })
 })
 
-document.querySelector('#playBtn').addEventListener("click", () => {
+document.querySelector('.playPause').addEventListener("click", () => {
     fetch("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=michael_jackson")
     .then(response => response.json())
     .then((data) => {
-        console.log(data)
+        // console.log(data)
 
         const container = document.querySelector('.container');
         const artist = data['album'][0].strArtist;
