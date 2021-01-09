@@ -63,7 +63,6 @@ document.querySelector('#nextBtn').addEventListener("click", () => {
         const nextPlaylist = data['album'][currIndex + 1].strAlbum;
         currIndex += 1;
 
-        //replace previous textNode
         let albumName = document.querySelector('#albumName');
         container.appendChild(albumName).innerText = 'Album: ' + nextPlaylist;
 
@@ -106,7 +105,6 @@ document.querySelector('#backBtn').addEventListener("click", () => {
         const currentPlaylist = data['album'][currIndex].strAlbum;
         const prevPlaylist = data['album'][currIndex - 1].strAlbum;
 
-        //replace previous textNode
         //if we start at the first song, the back button should not work. 
         if(currIndex >= 1) {
             let albumName = document.querySelector('#albumName');
@@ -114,8 +112,8 @@ document.querySelector('#backBtn').addEventListener("click", () => {
     
             let artistName = document.querySelector('#artistName');
             container.appendChild(artistName).innerText = 'Artist: ' + artist;
-
         }
+
         currIndex -= 1;
         
     }).catch(err => {

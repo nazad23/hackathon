@@ -4,7 +4,7 @@
   "description": "An extension that allows you to pause, play, and change the media you have opened in other tabs!",
   "version": "1.0",
   "browser_action": {
-      "default_icon": "apple2.png",
+      "default_icon": "headphones.png",
       "default_popup": "popup.html"
   },
   "content_scripts": [
