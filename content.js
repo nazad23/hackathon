@@ -23,24 +23,110 @@ chrome.runtime.onMessage.addListener(
     fetch("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=michael_jackson")
     .then(response => response.json())
     .then((data) => {
-        console.log(data)
+        // console.log(data)
 
         const container = document.querySelector('.container');
         const artist = data.album[0].strArtist;
 
         //display the album name in the container div/class
-        for(let i = 0; i < data.album.length; i++){
-            const album = data.album[i].strAlbum;
+        // for(let i = 0; i < data.album.length; i++){
+        //     const album = data.album[i].strAlbum;
 
-            container.appendChild(document.createTextNode(album));
-            container.appendChild(document.createElement('br'));
-        }
+        //     container.appendChild(document.createTextNode(album));
+        //     container.appendChild(document.createElement('br'));
+        // }
         
 
     }).catch(err => {
         console.error(err);
     })
 );
+//use doc query selector, provide the id (nextBtn)
+//use an if conditional or other buttons...
+//create a function when you click the next button id...
+//looping through object data
+//display the current song/ album on the page
+//use fetch request (GET)
+//return and append data to class Container
+
+let currIndex = 0;
+
+document.querySelector('#nextBtn').addEventListener("click", () => {
+    fetch("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=michael_jackson")
+    .then(response => response.json())
+    .then((data) => {
+        console.log(data)
+        
+        const container = document.querySelector('.container');
+        const artist = data['album'][0].strArtist;
+        const currentPlaylist = data['album'][currIndex].strAlbum;
+        const nextPlaylist = data['album'][currIndex + 1].strAlbum;
+        currIndex += 1;
+
+        //replace previous textNode
+        let albumName = document.querySelector('#albumName');
+        container.appendChild(albumName).innerText = 'Album: ' + nextPlaylist;
+
+        let artistName = document.querySelector('#artistName');
+        container.appendChild(artistName).innerText = 'Artist: ' + artist;
+        
+    }).catch(err => {
+        console.error(err);
+    })
+})
+
+document.querySelector('#playBtn').addEventListener("click", () => {
+    fetch("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=michael_jackson")
+    .then(response => response.json())
+    .then((data) => {
+        console.log(data)
+
+        const container = document.querySelector('.container');
+        const artist = data['album'][0].strArtist;
+        const currentPlaylist = data['album'][currIndex].strAlbum;
+       
+        //replace previous textNode
+        // container.appendChild(document.createTextNode(currentPlaylist));
+        // container.appendChild(document.createElement('br'));
+        // container.appendChild(document.createTextNode(artist));
+        // container.appendChild(document.createElement('br'));
+        
+    }).catch(err => {
+        console.error(err);
+    })
+})
+
+document.querySelector('#backBtn').addEventListener("click", () => {
+    fetch("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=michael_jackson")
+    .then(response => response.json())
+    .then((data) => {
+        
+        const container = document.querySelector('.container');
+        const artist = data['album'][0].strArtist;
+        const currentPlaylist = data['album'][currIndex].strAlbum;
+        const prevPlaylist = data['album'][currIndex - 1].strAlbum;
+
+        //replace previous textNode
+        //if we start at the first song, the back button should not work. 
+        if(currIndex >= 1) {
+            let albumName = document.querySelector('#albumName');
+            container.appendChild(albumName).innerText = 'Album: ' + prevPlaylist;
+    
+            let artistName = document.querySelector('#artistName');
+            container.appendChild(artistName).innerText = 'Artist: ' + artist;
+
+        }
+        currIndex -= 1;
+        
+    }).catch(err => {
+        console.error(err);
+    })
+})
+
+
+
+
+
 
 //test object since we havent connected to youtube yet
 
